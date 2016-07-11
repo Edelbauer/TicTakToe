@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h1 class= "Header">Tic Tac Toe</h1>
+    <meta charset="UTF-8">
+    <title>Tic Tac Toe</title>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="../script/tic_tac_toe_leicht_bestof5.js"></script>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/tic_tac_toe_leicht.css">
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<table>
+    <tr>
+        <td><input class="button" value= "" type="button" id ="a"/></td>
+        <td><input class="button" value= "" type="button" id ="b"/> </td>
+        <td><input class="button" value= "" type="button" id ="c"/></td>
+    </tr>
+    <tr>
+        <td><input class="button" value= "" type="button" id ="d"/> </td>
+        <td><input class="button" value= "" type="button" id ="e"/> </td>
+        <td><input class="button" value= "" type="button" id ="f"/> </td>
+    </tr>
+    <tr>
+        <td><input class="button" value= "" type="button" id = "g"/> </td>
+        <td><input class="button" value= "" type="button" id ="h"/> </td>
+        <td><input class="button" value= "" type="button" id ="i"/> </td>
+    </tr>
+</table>
+<div id="lblWin" style="background-color:red,padding:20px;font-size:50px"></div>
+<br>
+
+<div class= "Ueberschrift">Viel Spaß!!!</div>
+<input class="modien" value= "Reset" type="button" onclick="Reset()"/>
+<input class="modien" value="Zurück" type="button" onclick="zurueck()"/>
+<div ><div style="display:inline-block" class="Header" id="playerpunkte"></div> <div style="display:inline-block" class="Header" >Wins</div></div>
+
+<div ><div style="display:inline-block" class="Header"id="pcpunkte"></div> <div style="display:inline-block" class="Header" >Loses</div></div>
+</html>

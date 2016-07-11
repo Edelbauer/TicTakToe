@@ -1,0 +1,54 @@
+
+
+.extrem{
+    font-size: 50px;
+    font-weight: bolder;
+    height: 100px;
+    width: 500px;
+    background-color: red;
+
+
+
+}
+
+.schwer{
+    font-size: 50px;
+    font-weight: bolder;
+    height: 100px;
+    width: 500px;
+    background-color: yellow;
+
+
+}
+
+
+.normal{
+    font-size: 50px;
+    font-weight: bolder;
+    height: 100px;
+    width: 500px;
+    background-color: limegreen;
+
+
+
+}
+.leicht{
+    font-size: 50px;
+    font-weight: bolder;
+    height: 100px;
+    width: 500px;
+    background-color: deepskyblue;
+
+
+
+}
+.modien {
+    background-color: darkgrey;
+    height: 100px;
+    width: 500px;
+    font-size: 50px;
+    font-weight: bolder;
+
+}
+
+

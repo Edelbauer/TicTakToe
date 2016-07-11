@@ -1,0 +1,68 @@
+/*index.html*/
+.knopf{
+    width: 500px;
+    height: 130px;
+    font-size: 55px;
+    font-weight:bolder;
+    background-color: darkgrey;
+}
+/*single-menue*/
+.extrem{
+    font-size: 50px;
+    font-weight: bolder;
+    height: 100px;
+    width: 500px;
+    background-color: red;
+}
+.Header{
+    color:darkorange;
+    font-family:cursive;
+    font-size: 55px;
+    font-style: oblique;
+    font-variant-ligatures: normal;
+    text-shadow: 6px 6px 5px black;
+}
+.schwer{
+    font-size: 50px;
+    font-weight: bolder;
+    height: 100px;
+    width: 500px;
+    background-color: yellow;
+}
+.normal{
+    font-size: 50px;
+    font-weight: bolder;
+    height: 100px;
+    width: 500px;
+    background-color: limegreen;
+}
+.leicht{
+    font-size: 50px;
+    font-weight: bolder;
+    height: 100px;
+    width: 500px;
+    background-color: deepskyblue;
+}
+/*tic_tac_toe_2_sieler*/
+.button{
+    background-color: darkgrey;
+    width: 130px;
+    height: 130px;
+    font-size: 110px;
+    font-weight: bolder;
+}
+.button2{
+    width: 130px;
+    height: 40px;
+    font-size: 30px;
+    font-weight: bold;
+}
+.Ueberschrift{
+    font-size: 75px;
+    font-weight: bolder;
+    font-family:fantasy;
+}
+/*tic_tac_toe_leicht*/
+/*tic_tac_toe_normal*/
+/*tic_tac_toe_schwer*/
+/*tic_tac_toe_extrem*/
