@@ -2,32 +2,48 @@
  * Created by Praktikant.STTINSM on 07.07.2016.
  */
 //alle
-var i=0;
-var h=9;
-var u=0;
-var wp=0;
-var wc=0;
+var i=0;//setzt in die Buttons abwechselnd X und O
+var h=9;//zählt die Spielzüge hinunter
+var u=0;//wird auf 1 gesetzt, wenn jemand gewonnen hat
+var wp=0; //WIns vom Spieler
+var wc=0;//wins vom Computer
+
+/**
+ * Setzt die wins und loses auf 0, Geht eine Ebene zurück
+ */
 function zurueck(){
     document.cookie="player=0";
     document.cookie="pc=0";
     window.location="/Tic_Tac_Toe/views/modien_2_spieler.html";
 }
+
+/**
+ * resettet die Seite
+ * @constructor
+ */
 function Reset(){
     window.location=window.location;
-
-
 }
 
 $(function(){
+    /**
+     * wenn in player oder in pc NaN steht, wird es mit 0 überschrieben
+     */
     if (getCookie("player")=="NaN"){
         document.cookie="player=0";
     }
     if (getCookie("pc")=="NaN"){
         document.cookie="pc=0";
     }
+    /**
+     * die Wins und loses werden übergeben,damit sie ausgegeben werden
+     */
     $("#playerpunkte").html(getCookie("player"));
     $("#pcpunkte").html(getCookie("pc"));
     $(':button.button').on('click',function(){
+        /**
+         * wenn noch keiner gewonnen hat und in dem Feld noch nichts steht, wird abwechselnd es mit X oder O beschrieben
+          */
         if (u==0){
             if ($(this).val()==""){
                 if (i%2==0){
@@ -66,6 +82,9 @@ $(function(){
                 setwins("pc");
                 u++;
             }
+            /**
+             * Wenn alle Spielzüge verbraucht sind und noch keiner gewonnen hat ist unentschieden
+             */
             if (h==0&& u==0){
                 setResult("Unentschieden!",true);
             }
@@ -76,7 +95,11 @@ $(function(){
 });
 
 
-
+/**
+ * Lässt das Resultat erscheinen und resettet die Seite
+ * @param text
+ * @param reset
+ */
 var setResult = function(text,reset=false){
 
 
@@ -95,6 +118,11 @@ function getCookie(name) {
     var parts = value.split("; " + name + "=");
     if (parts.length == 2) return parts.pop().split(";").shift();
 }
+
+/**
+ * erhöht wenn win
+ * @param player
+ */
 function setwins(player){
     var wc=getCookie(player);
     var wp=getCookie(player);
@@ -113,21 +141,27 @@ function setwins(player){
 function getmatch(){
     return getCookie("match");
 }
-
+/**
+ * hohlt die wins
+ */
 function getwins(player){
     return getCookie(player);
 }
 
-
+/**
+ * findet heraus, wer gewonnen hat und setzt die wins und loses auf 0
+ * @param wp
+ * @param wc
+ */
 function gewonnen( wp, wc){
     if(wp >= 3 || wc >= 3){
         document.cookie="player=0";
         document.cookie="pc=0";
         if(wp>wc){
-            alert("win");
+            alert("O Won!");
             window.location="/Tic_Tac_Toe/views/modien_2_spieler.html";
         }else
-            alert("lose");
+            alert("X Won!");
         window.location="/Tic_Tac_Toe/views/modien_2_spieler.html";
 
     }

@@ -12,16 +12,19 @@
 
 
 
-var u=0;
-var h=9;
-var wc;
-var wp;
+var u=0;//wird auf 1 gesetzt, wenn bereit jemand gewonnen hat
+var h=9;//zählt die möglichen Spielzüge hinunter
+var wc;//wins vom Computer
+var wp;//Wins vom Spieler
+/**
+ * Setzt die wins und loses auf 0 zurück, und gewht eine Ebene zurück
+ */
 function zurueck(){
     document.cookie="player=0";
     document.cookie="pc=0";
     window.location="/Tic_Tac_Toe/views/modien_extrem.html";
 }
-//Neustart:
+//resettet das Fenster
 function Reset(){
     window.location=window.location;
 }
@@ -38,6 +41,10 @@ $(function(){
     $('#lblWin').fadeOut(0);
 
     $(':button.button').on('click',function(){
+        /**
+         * wenn noch niemand gewonnen hat, und in dem Feld noch nicht steht, wird es mit einem X beschrieben
+         * und wenn noch mindestens 1 Feld übrig ist, wird com() aufgerufen
+         */
         if (u==0){
 
 
@@ -51,6 +58,7 @@ $(function(){
 
                 h--;
             }
+            //Gewinnabfrage************************************************************
 
             if  ((($("#a").val()=='X') && ($("#b").val()=='X') && ($("#c").val()=='X')) ||
                 (($("#c").val()=='X') && ($("#f").val()=='X') && ($("#i").val()=='X')) ||
@@ -62,7 +70,6 @@ $(function(){
                 (($("#a").val()=='X') && ($("#e").val()=='X') && ($("#i").val()=='X'))){
                 setResult("Gewonnen!",true);
 setwins("player");
-                //Gewinnabfrage************************************************************
 
                 u++;
             } else if((($("#a").val()=='O') && ($("#b").val()=='O') && ($("#c").val()=='O')) ||
@@ -78,6 +85,7 @@ setwins("pc");
 
                 u++;
             }
+            //wenn noch niemand gewonnen hat, und alle Felder aufgebraucht sind, wird Unentschieden ausgegeben
             if (h==0&& u==0){
                 setResult("Unentschieden!",true);
             }
@@ -87,7 +95,9 @@ setwins("pc");
 
 });
 
-
+/**
+ * Das Resultat erscheint und die Seite wird resettet
+ */
 var setResult = function(text,reset=false){
 
 
@@ -107,6 +117,10 @@ function getCookie(name) {
     var parts = value.split("; " + name + "=");
     if (parts.length == 2) return parts.pop().split(";").shift();
 }
+/**
+ * erhöht,wenn gewonnen
+ * @param player
+ */
 function setwins(player){
     var wc=getCookie(player);
     var wp=getCookie(player);
@@ -126,11 +140,20 @@ function getmatch(){
     return getCookie("match");
 }
 
+/**
+ * hohlt die wins
+ * @param player
+ */
 function getwins(player){
     return getCookie(player);
 }
 
-
+/**
+ * Wenn ein Spieler schon 2 Mal gewonnen hat, wird herausgefunden welcher, und player und pc werden zurückgesetzt
+ * das Fenster wird um eine Ebene zurtückgesetzt
+ *  @param wp
+ * @param wc
+ */
 function gewonnen( wp, wc){
     if(wp >= 2 || wc >= 2){
         document.cookie="player=0";
@@ -148,7 +171,10 @@ function gewonnen( wp, wc){
 
 }
 
-
+/**
+ * Es wird eine Random Zahl generiert, die dann in eine id umgewandelt wird
+ * @returns {*}
+ */
 function random(){
     var id;
     var min = 0;
@@ -191,11 +217,9 @@ function random(){
     }
 
 
-    //KIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKI
+    //Künstliche Intelligenz
 
-    //DEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEF
-    //DEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEF
-    //DEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEF
+  //Verteidigung
     //waagrecht**********************************************************************
     //erste reihe
     if ($("#a").val()=="X"&& $("#b").val()=="X"&& $("#c").val()==""){
@@ -298,15 +322,9 @@ function random(){
         id = "c";
 
     }
-    //DEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEF
-    //DEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEF
-    //DEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEF
 
 
-
-    //ATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTAC
-    //ATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTAC
-    //ATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTAC
+//Angriff
 
     //waagrecht**********************************************************************
     //erste reihe
@@ -411,16 +429,6 @@ function random(){
 
     }
 
-    //ATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTAC
-    //ATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTAC
-    //ATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTAC
-
-
-
-
-
-    //KIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIK
-
 
 
 
@@ -430,7 +438,9 @@ function random(){
 }
 
 
-
+/**
+ * Der Computer setzt sein O
+ */
 function com(){
     var id=random();
     while (ueberpruefe(id)){
@@ -448,6 +458,7 @@ function com(){
             setResult("Gewonnen!",true);
             u++;
         }
+        //wenn noch niemand gewonnen hat, wird das O gesetz
         if (u==0){
             console.log($("#"+id).val("O"));
             h--;
@@ -456,7 +467,12 @@ function com(){
 
     }
 
-
+    /**#
+     *
+     * Überprüft, ob das Feld mit desen id noch leer ist
+     * @param id
+     * @returns {number}
+     */
     function ueberpruefe(id){
         if ($("#"+id).val()==""){
             return 0;

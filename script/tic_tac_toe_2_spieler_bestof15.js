@@ -2,24 +2,28 @@
  * Created by Praktikant.STTINSM on 07.07.2016.
  */
 //alle
-var i=0;
-var h=9;
-var u=0;
-var wp=0;
-var wc=0;
-function zurueck(){
+var i=0;//setzt abwechselnd X ubndb O in die Felder
+var h=9;//zählt die möglichen Spielzüge hinunter
+var u=0;//wird auf 1 gesetzt, wenn schon jemand gewonnen hat
+var wp=0;//wins vom Spieler
+var wc=0;//wins vom Computer
 
-    window.location="/Tic_Tac_Toe/views/modien_2_spieler.html";
-}
-function Reset(){
+
+/**
+ * Geht eine Ebene zurück, setzt die wins und loses auf 0
+ */
+function zurueck(){
     document.cookie="player=0";
     document.cookie="pc=0";
+    window.location="/Tic_Tac_Toe/views/modien_2_spieler.html";
+}
+//resettet die Seite
+function Reset(){
     window.location=window.location;
-
-
 }
 
 $(function(){
+    //Wenn in player oder in pc NaN steht, wird es mit 0 überschreiben
     if (getCookie("player")=="NaN"){
         document.cookie="player=0";
     }
@@ -29,6 +33,7 @@ $(function(){
     $("#playerpunkte").html(getCookie("player"));
     $("#pcpunkte").html(getCookie("pc"));
     $(':button.button').on('click',function(){
+        //wenn noch keiner gewonnen hat, und das Feld noch leer ist, wird es mit X oder O beschrieben
         if (u==0){
             if ($(this).val()==""){
                 if (i%2==0){
@@ -67,6 +72,7 @@ $(function(){
                 setwins("pc");
                 u++;
             }
+            //Wenn noch keiner géwonnen hat, und wenn alle Spielzüge verbraucht sind, ist unentschieden
             if (h==0&& u==0){
                 setResult("Unentschieden!",true);
             }
@@ -77,7 +83,11 @@ $(function(){
 });
 
 
-
+/**
+ * Gibt das Resultat aus, ruft reset() auf
+ * @param text
+ * @param reset
+ */
 var setResult = function(text,reset=false){
 
 
@@ -90,12 +100,17 @@ var setResult = function(text,reset=false){
 
     });
 };
-
+/**
+ * hohlt cookie vom container
+ * @param name
+ * @returns {T}
+ */
 function getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
     if (parts.length == 2) return parts.pop().split(";").shift();
 }
+//erhöht wenn win
 function setwins(player){
     var wc=getCookie(player);
     var wp=getCookie(player);
@@ -114,12 +129,20 @@ function setwins(player){
 function getmatch(){
     return getCookie("match");
 }
-
+/**
+ * hohlt die wins
+ * @param player
+ * @returns {T}
+ */
 function getwins(player){
     return getCookie(player);
 }
 
-
+/**
+ * Wenn jemand 8 Siege erreicht hat, wird player und pc auf 0 gesetzt und es werdedn die Mehrspieler-Modien aufgerufen
+ * @param wp
+ * @param wc
+ */
 function gewonnen( wp, wc){
     if(wp >= 8 || wc >= 8){
         document.cookie="player=0";

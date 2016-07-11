@@ -12,6 +12,9 @@ var u=0;
 var h=9;
 var wc=0;
 var wp=0;
+/**
+ * geht um eine Ebene zurück
+ */
 function zurueck(){
     document.cookie="player=0";
     document.cookie="pc=0";
@@ -22,7 +25,9 @@ function zurueck(){
 function Reset(){
     window.location=window.location;
 }
-
+/**
+ * wandelt NaN in 0 um
+ */
 $(function(){
     if (getCookie("player")=="NaN"){
         document.cookie="player=0";
@@ -34,6 +39,9 @@ $(function(){
     $("#pcpunkte").html(getCookie("pc"));
     $('#lblWin').fadeOut(0);
 
+    /**
+     * Setzt ein X in das Feld
+     */
     $(':button.button').on('click',function(){
         if (u==0){
 
@@ -77,6 +85,7 @@ $(function(){
                 setwins("pc");
                 u++;
             }
+            //wenn alle versuche aufgebraucht sind, und noch niemand gewonnen hata
             if (h==0&& u==0){
                 setResult("Unentschieden!",true);
             }
@@ -86,7 +95,11 @@ $(function(){
 
 });
 
-
+/**
+ * Lässt das Resultat erscheinen
+ * @param text
+ * @param reset
+ */
 var setResult = function(text,reset=false){
 
 
@@ -125,12 +138,16 @@ function setwins(player){
 function getmatch(){
     return getCookie("match");
 }
-
+/**hohlt die wins
 function getwins(player){
     return getCookie(player);
 }
 
-
+/**
+ * Prüft, wer gewonnen hat, und gibt es aus
+ * @param wp
+ * @param wc
+ */
 function gewonnen( wp, wc){
     if(wp >= 8 || wc >= 8){
         document.cookie="player=0";
@@ -147,7 +164,10 @@ function gewonnen( wp, wc){
 
 
 }
-
+/**
+ * generiert eine Random Zahl, die in eine id umgewandelt wird
+ * @returns {*}
+ */
 function random(){
     var random=0;
     var id;
@@ -191,7 +211,7 @@ function random(){
     }
 
     if (random==0){
-        //KIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKI
+
 
         //waagrecht**********************************************************************
         //erste reihe
@@ -295,7 +315,7 @@ function random(){
             id = "c";
 
         }
-        //KIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIK
+
         random=1;
     }else if (random== -1){
         random =2;
@@ -316,7 +336,9 @@ function random(){
 }
 
 
-
+/**
+ * Setzt ein O an eine Freie Position
+ */
 function com(){
     var id=random();
     while (ueberpruefe(id)){
@@ -339,7 +361,11 @@ function com(){
         }
     }
 
-
+    /**
+     * Prüft, ob das Feld leer ist
+     * @param id
+     * @returns {number}
+     */
     function ueberpruefe(id){
         if ($("#"+id).val()==""){
             return 0;

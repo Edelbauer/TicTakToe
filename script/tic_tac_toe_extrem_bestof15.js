@@ -12,10 +12,13 @@
 
 
 
-var u=0;
-var h=9;
-var wc;
-var wp;
+var u=0;//wird auf 1 gesetzt, wenn bereits jemand gewonnen hat
+var h=9;//zählt die möglichen Spielzüge hinunter
+var wc=0;//wins vom Computer
+var wp=0;//wins vom Spieler
+/**
+ * Geht eine Ebene zurück und setzt die wins und loses auf 0
+ */
 function zurueck(){
     document.cookie="player=0";
     document.cookie="pc=0";
@@ -25,7 +28,9 @@ function zurueck(){
 function Reset(){
     window.location=window.location;
 }
-
+/**
+ * wenn in player oder in pc NaN steht, wird es mir´t 0 überschrieben
+ */
 $(function(){
     if (getCookie("player")=="NaN"){
         document.cookie="player=0";
@@ -38,6 +43,8 @@ $(function(){
     $('#lblWin').fadeOut(0);
 
     $(':button.button').on('click',function(){
+        //wenn noch niemand gewonnen hat, und in desseM Feld noch nichts steht, wird es mit einem X beschrieben#
+        //und com() wird aufgerufen
         if (u==0){
 
 
@@ -51,7 +58,7 @@ $(function(){
 
                 h--;
             }
-
+            //Gewinnabfrage************************************************************
             if  ((($("#a").val()=='X') && ($("#b").val()=='X') && ($("#c").val()=='X')) ||
                 (($("#c").val()=='X') && ($("#f").val()=='X') && ($("#i").val()=='X')) ||
                 (($("#i").val()=='X') && ($("#h").val()=='X') && ($("#g").val()=='X')) ||
@@ -62,7 +69,7 @@ $(function(){
                 (($("#a").val()=='X') && ($("#e").val()=='X') && ($("#i").val()=='X'))){
                 setResult("Gewonnen!",true);
                 setwins("player");
-                //Gewinnabfrage************************************************************
+
 
                 u++;
             } else if((($("#a").val()=='O') && ($("#b").val()=='O') && ($("#c").val()=='O')) ||
@@ -78,6 +85,9 @@ $(function(){
 
                 u++;
             }
+            /**
+             * wenn noch niemánd gewonnen hat, und alle möglichen spielzüge aufgeraucht sind, wird unentschieden ausgegeben
+             */
             if (h==0&& u==0){
                 setResult("Unentschieden!",true);
             }
@@ -87,7 +97,11 @@ $(function(){
 
 });
 
-
+/**
+ * Blendet das Resultat  ein
+ * @param text
+ * @param reset
+ */
 var setResult = function(text,reset=false){
 
 
@@ -101,12 +115,20 @@ var setResult = function(text,reset=false){
     });
 };
 
-
+/**
+ * hohlt cookie aus dem cookie-container
+ * @param name
+ * @returns {T}
+ */
 function getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
     if (parts.length == 2) return parts.pop().split(";").shift();
 }
+/**
+ * erhöht, wenn gewonnen
+ * @param player
+ */
 function setwins(player){
     var wc=getCookie(player);
     var wp=getCookie(player);
@@ -125,12 +147,21 @@ function setwins(player){
 function getmatch(){
     return getCookie("match");
 }
-
+/**
+ * hohlt die wins
+ * @param player
+ * @returns {T}
+ */
 function getwins(player){
     return getCookie(player);
 }
 
-
+/**
+ * erkennt den Gewinner und setzt player und pc auf 0
+ * setzt die Seite um 1 zurück
+ * @param wp
+ * @param wc
+ */
 function gewonnen( wp, wc){
     if(wp >= 8 || wc >= 8){
         document.cookie="player=0";
@@ -148,7 +179,10 @@ function gewonnen( wp, wc){
 
 }
 
-
+/**
+ * generiert eine Random Zahl und wandelt sie in eine id um
+ * @returns {*}
+ */
 function random(){
     var id;
     var min = 0;
@@ -191,11 +225,8 @@ function random(){
     }
 
 
-    //KIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKI
-
-    //DEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEF
-    //DEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEF
-    //DEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEF
+//künstliche Intelligenz
+    //Verteidigung
     //waagrecht**********************************************************************
     //erste reihe
     if ($("#a").val()=="X"&& $("#b").val()=="X"&& $("#c").val()==""){
@@ -298,15 +329,7 @@ function random(){
         id = "c";
 
     }
-    //DEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEF
-    //DEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEF
-    //DEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEF
-
-
-
-    //ATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTAC
-    //ATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTAC
-    //ATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTAC
+//Angriff
 
     //waagrecht**********************************************************************
     //erste reihe
@@ -411,26 +434,15 @@ function random(){
 
     }
 
-    //ATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTAC
-    //ATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTAC
-    //ATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTAC
-
-
-
-
-
-    //KIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIK
-
-
-
-
 
 
     return id;
 }
 
 
-
+/**
+ * ruft random auf,überprüft, ob der Spieler gewonnen hat, und setzt ein O
+ */
 function com(){
     var id=random();
     while (ueberpruefe(id)){
@@ -456,7 +468,11 @@ function com(){
 
     }
 
-
+    /**
+     * überprüft, ob in ´dem Felad mit der Id etwas enthalten ist
+     * @param id
+     * @returns {number}
+     */
     function ueberpruefe(id){
         if ($("#"+id).val()==""){
             return 0;

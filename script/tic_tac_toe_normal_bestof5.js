@@ -12,6 +12,9 @@ var u=0;
 var h=9;
 var wc=0;
 var wp=0;
+/**
+ * geht um eine Eenene zurück
+ */
 function zurueck(){
     document.cookie="player=0";
     document.cookie="pc=0";
@@ -22,7 +25,9 @@ function zurueck(){
 function Reset(){
     window.location=window.location;
 }
-
+/**
+ * Wenn in player oder in pc NaN stht, wird es in einen 0er umgewandelt
+ */
 $(function(){
     if (getCookie("player")=="NaN"){
         document.cookie="player=0";
@@ -33,7 +38,9 @@ $(function(){
     $("#playerpunkte").html(getCookie("player"));
     $("#pcpunkte").html(getCookie("pc"));
     $('#lblWin').fadeOut(0);
-
+    /**
+     * inn das Feld wird ein X geschrieben
+     */
     $(':button.button').on('click',function(){
         if (u==0){
 
@@ -77,6 +84,9 @@ $(function(){
                 setwins("pc");
                 u++;
             }
+            /**
+             * Wenn alle versuche verbraucht sind,und noch niemand gewonnnen hat
+             */
             if (h==0&& u==0){
                 setResult("Unentschieden!",true);
             }
@@ -86,7 +96,11 @@ $(function(){
 
 });
 
-
+/**
+ * es lässt das Resultat erscheinen
+ * @param text
+ * @param reset
+ */
 var setResult = function(text,reset=false){
 
 
@@ -101,7 +115,11 @@ var setResult = function(text,reset=false){
 };
 
 
-
+/**
+ * hohlt den cookie vom container
+ * @param name
+ * @returns {T}
+ */
 function getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
@@ -130,7 +148,11 @@ function getwins(player){
     return getCookie(player);
 }
 
-
+/**
+ * es prüft, wer gewonnen hat, und geht zurück zu den modien
+ * @param wp
+ * @param wc
+ */
 function gewonnen( wp, wc){
     if(wp >= 3 || wc >= 3){
         document.cookie="player=0";
@@ -147,7 +169,10 @@ function gewonnen( wp, wc){
 
 
 }
-
+/**
+ * es generiert einen Random Zahl und wandelt sie in eine id um
+ * @returns {*}
+ */
 function random(){
     var random=0;
     var id;
@@ -191,7 +216,7 @@ function random(){
     }
 
     if (random==0){
-        //KIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKI
+
 
         //waagrecht**********************************************************************
         //erste reihe
@@ -295,7 +320,7 @@ function random(){
             id = "c";
 
         }
-        //KIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIK
+
         random=1;
     }else if (random== -1){
         random =2;
@@ -316,7 +341,9 @@ function random(){
 }
 
 
-
+/**
+ * erhält die random id und setzt dort das O hin
+ */
 function com(){
     var id=random();
     while (ueberpruefe(id)){
@@ -339,7 +366,11 @@ function com(){
         }
     }
 
-
+    /**
+     * überprüft, ob in dem Feld ein Zeichen steht
+     * @param id
+     * @returns {number}
+     */
     function ueberpruefe(id){
         if ($("#"+id).val()==""){
             return 0;

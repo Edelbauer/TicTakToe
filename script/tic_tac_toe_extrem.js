@@ -9,14 +9,14 @@
 
 
 
-var u=0;
-var h=9;
+var u=0;//wird auf 1 gesetzt, wenn schon jemand gewonnen hat
+var h=9;//zählt die spielzüge hinunter
+//geht eine Ebene zurück
 function zurueck(){
-
     window.location="/Tic_Tac_Toe/views/modien_extrem.html";
 }
 
-//Neustart:
+//resettet die Seite
 function Reset(){
     window.location=window.location;
 }
@@ -26,6 +26,7 @@ $(function(){
     $('#lblWin').fadeOut(0);
 
     $(':button.button').on('click',function(){
+        //wenn  noch keiner gewonnen hat, und das Feld noch leer ist, wird es mit einem X beschrieben und com () aufggerufen
         if (u==0){
 
 
@@ -39,7 +40,7 @@ $(function(){
 
                 h--;
             }
-
+//Gewinnabfrage*************************************************************************
             if  ((($("#a").val()=='X') && ($("#b").val()=='X') && ($("#c").val()=='X')) ||
                 (($("#c").val()=='X') && ($("#f").val()=='X') && ($("#i").val()=='X')) ||
                 (($("#i").val()=='X') && ($("#h").val()=='X') && ($("#g").val()=='X')) ||
@@ -49,9 +50,6 @@ $(function(){
                 (($("#c").val()=='X') && ($("#e").val()=='X') && ($("#g").val()=='X')) ||
                 (($("#a").val()=='X') && ($("#e").val()=='X') && ($("#i").val()=='X'))){
                 setResult("Gewonnen!",true);
-
-                //Gewinnabfrage************************************************************
-
                 u++;
             } else if((($("#a").val()=='O') && ($("#b").val()=='O') && ($("#c").val()=='O')) ||
                 (($("#c").val()=='O') && ($("#f").val()=='O') && ($("#i").val()=='O')) ||
@@ -75,7 +73,11 @@ $(function(){
 
 });
 
-
+/**
+ * Das Resultat wird eingeblendet und sei Seite wird resettet
+ * @param text
+ * @param reset
+ */
 var setResult = function(text,reset=false){
 
 
@@ -91,7 +93,7 @@ var setResult = function(text,reset=false){
 
 
 
-
+//genereirt eine random Zahl, die in eine id umgewandelt wird
 function random(){
     var id;
     var min = 0;
@@ -134,11 +136,9 @@ function random(){
     }
 
 
-    //KIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKI
+    //Künstliche Intelligenz des Computers
 
-    //DEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEF
-    //DEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEF
-    //DEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEF
+    //Verteidigung
     //waagrecht**********************************************************************
     //erste reihe
     if ($("#a").val()=="X"&& $("#b").val()=="X"&& $("#c").val()==""){
@@ -241,15 +241,10 @@ function random(){
         id = "c";
 
     }
-    //DEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEF
-    //DEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEF
-    //DEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEFDEF
+    //Verteidigung
 
 
-
-    //ATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTAC
-    //ATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTAC
-    //ATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTAC
+    //Angriff
 
     //waagrecht**********************************************************************
     //erste reihe
@@ -354,15 +349,7 @@ function random(){
 
     }
 
-    //ATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTAC
-    //ATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTAC
-    //ATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTACATTAC
 
-
-
-
-
-    //KIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIK
 
 
 
@@ -372,7 +359,9 @@ function random(){
     return id;
 }
 
-
+/**
+ * Der Computer setzt sein O
+ */
 
 function com(){
     var id=random();
@@ -391,6 +380,7 @@ function com(){
             setResult("Gewonnen!",true);
             u++;
         }
+        //Wenn noch keier gewonnen hat, wird ein O gesetzt
         if (u==0){
             console.log($("#"+id).val("O"));
             h--;
@@ -399,7 +389,11 @@ function com(){
 
     }
 
-
+    /**
+     * Überprüft,of in den Button mit einer bestimmten id etwas darin steht
+     * @param id
+     * @returns {number}
+     */
     function ueberpruefe(id){
         if ($("#"+id).val()==""){
             return 0;

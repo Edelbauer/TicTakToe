@@ -7,6 +7,7 @@
 
 var u=0;
 var h=9;
+//geht eine ebene zurück
 function zurueck(){
 
     window.location="/Tic_Tac_Toe/views/modien_normal.html";
@@ -20,7 +21,9 @@ function Reset(){
 $(function(){
 
     $('#lblWin').fadeOut(0);
-
+    /**
+     * setzt das X
+     */
     $(':button.button').on('click',function(){
         if (u==0){
 
@@ -72,7 +75,11 @@ $(function(){
 
 });
 
-
+/**
+ * lässt das Resultat erscheinen
+ * @param text
+ * @param reset
+ */
 var setResult = function(text,reset=false){
 
 
@@ -87,8 +94,10 @@ var setResult = function(text,reset=false){
 };
 
 
-
-
+/**
+ * generiert eine random Zahl und wandelt sie in eine id um
+ * @returns {*}
+ */
 function random(){
     var random=0;
     var id;
@@ -132,7 +141,7 @@ function random(){
     }
 
     if (random==0){
-        //KIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKI
+
 
         //waagrecht**********************************************************************
         //erste reihe
@@ -236,7 +245,7 @@ function random(){
             id = "c";
 
         }
-        //KIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIK
+
         random=1;
     }else if (random== -1){
         random =2;
@@ -257,7 +266,9 @@ function random(){
 }
 
 
-
+/**
+ * bekommt die random id und setzt dort das o hin
+ */
 function com(){
     var id=random();
     while (ueberpruefe(id)){
@@ -280,7 +291,11 @@ u++;
         }
     }
 
-
+    /**
+     * überprüft, ob sich in diesem Feld ein Zeichen befindet
+     * @param id
+     * @returns {number}
+     */
     function ueberpruefe(id){
         if ($("#"+id).val()==""){
             return 0;

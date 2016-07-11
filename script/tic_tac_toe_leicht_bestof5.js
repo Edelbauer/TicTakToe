@@ -19,7 +19,9 @@ function zurueck(){
 function Reset(){
     window.location=window.location;
 }
-
+/**
+ * Wenn in Player oder in pc NaN steht, wird es mit 0 beschrieben
+ */
 $(function(){
     if (getCookie("player")=="NaN"){
         document.cookie="player=0";
@@ -31,6 +33,10 @@ $(function(){
     $("#pcpunkte").html(getCookie("pc"));
     $('#lblWin').fadeOut(0);
 
+    /**
+     * Wenn noch niemand gewonnen hat, und in diesem Feld noch nichts steht, wird es mit einem X beschrieben
+     * und es wird com()aufgerufen
+     */
     $(':button.button').on('click',function(){
         if (u==0){
 
@@ -102,12 +108,20 @@ var setResult = function(text,reset=false){
     });
 };
 
-
+/**
+ * hohlt wert aus dem cookie-container
+ * @param name
+ * @returns {T}
+ */
 function getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
     if (parts.length == 2) return parts.pop().split(";").shift();
 }
+/**
+ * erhöht,wenn gewonnen
+ * @param player
+ */
 function setwins(player){
     var wc=getCookie(player);
     var wp=getCookie(player);
@@ -126,12 +140,20 @@ function setwins(player){
 function getmatch(){
     return getCookie("match");
 }
-
+/**
+ * hohlt die wins
+ * @param player
+ * @returns {T}
+ */
 function getwins(player){
     return getCookie(player);
 }
 
-
+/**
+ * prüft, wer gewonnen hat, und setzt die wins und loses auf 0 und geht eine Ebene zurück
+ * @param wp
+ * @param wc
+ */
 function gewonnen( wp, wc){
     if(wp >= 3 || wc >= 3){
         document.cookie="player=0";
@@ -149,7 +171,10 @@ function gewonnen( wp, wc){
 
 }
 
-
+/**
+ * generiert eine Random Zahl, die in eine id umgewandelt wird
+ * @returns {*}
+ */
 function random(){
     var id;
     var min = 0;
@@ -194,7 +219,9 @@ function random(){
 }
 
 
-
+/**
+ * setzt ein O
+ */
 function com(){
     var id=random();
     while (ueberpruefe(id)){
@@ -220,7 +247,11 @@ function com(){
 
     }
 
-
+    /**
+     * schaut, ob das Feld mit der übergebenen id bereits beschrieben ist
+     * @param id
+     * @returns {number}
+     */
     function ueberpruefe(id){
         if ($("#"+id).val()==""){
             return 0;

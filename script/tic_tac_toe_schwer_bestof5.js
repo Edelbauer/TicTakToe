@@ -29,7 +29,9 @@ $(function(){
     $("#playerpunkte").html(getCookie("player"));
     $("#pcpunkte").html(getCookie("pc"));
     $('#lblWin').fadeOut(0);
-
+    /**
+     * Setzt ein X in das Feld
+     */
     $(':button.button').on('click',function(){
         if (u==0){
 
@@ -82,10 +84,12 @@ $(function(){
 
 });
 
-
+/**
+ * lässt das Resultat erscheinen
+ * @param text
+ * @param reset
+ */
 var setResult = function(text,reset=false){
-
-
     $('#lblWin').html(text).fadeIn(1000,function(){
         $(this).fadeOut(2500,function(){
             if(reset==true){
@@ -97,13 +101,20 @@ var setResult = function(text,reset=false){
 };
 
 
-
-
+/**
+ * hohlt cookie aus dem container
+ * @param name
+ * @returns {T}
+ */
 function getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
     if (parts.length == 2) return parts.pop().split(";").shift();
 }
+/**
+ * erhöht wins wenn win
+ * @param player
+ */
 function setwins(player){
     var wc=getCookie(player);
     var wp=getCookie(player);
@@ -122,12 +133,20 @@ function setwins(player){
 function getmatch(){
     return getCookie("match");
 }
-
+/**
+ * hohlt die wins
+ * @param player
+ * @returns {T}
+ */
 function getwins(player){
     return getCookie(player);
 }
 
-
+/**
+ * Prüft, wer gewonnen hat, und setzt alles zurück
+ * @param wp
+ * @param wc
+ */
 function gewonnen( wp, wc){
     if(wp >= 3 || wc >= 3){
         document.cookie="player=0";
@@ -146,7 +165,10 @@ function gewonnen( wp, wc){
 }
 
 
-
+/**
+ * generiert eine Random Zahl und wandelt diese in eine id um
+ * @returns {*}
+ */
 function random(){
     var id;
     var min = 0;
@@ -189,7 +211,7 @@ function random(){
     }
 
 
-    //KIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKI
+
 
     //waagrecht**********************************************************************
     //erste reihe
@@ -291,20 +313,15 @@ function random(){
     }
     if ($("#c").val()==""&& $("#e").val()=="X"&& $("#g").val()=="X"){
         id = "c";
-
     }
-    //KIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIK
-
-
-
-
-
 
     return id;
 }
 
 
-
+/**
+ * Setzt ein O in ein Freies Feld
+ */
 function com(){
     var id=random();
     while (ueberpruefe(id)){
@@ -330,7 +347,11 @@ function com(){
 
     }
 
-
+    /**
+     * prüft, ob in dem Feld ein Zeichen steht
+     * @param id
+     * @returns {number}
+     */
     function ueberpruefe(id){
         if ($("#"+id).val()==""){
             return 0;
@@ -341,7 +362,9 @@ function com(){
     }
 }
 
-
+/*
+Geht eine Ebene zurück
+ */
 function zurueck(){
     document.cookie="player=0";
     document.cookie="pc=0";

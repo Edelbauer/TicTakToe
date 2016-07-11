@@ -7,17 +7,26 @@ var h=9;
 var u=0;
 var wp=0;
 var wc=0;
+/**
+ * Geht eine Ebene zurück und setzt die wins und loses auf 0
+ */
 function zurueck(){
     document.cookie="player=0";
     document.cookie="pc=0";
     window.location="/Tic_Tac_Toe/views/modien_2_spieler.html";
 }
+/**
+ * resettet dei Seite
+ * @constructor
+ */
 function Reset(){
-
     window.location=window.location;
 }
 
 $(function(){
+    /**
+     * wenn player oder pc NaN ist wird es mit 0 ersetzt
+     */
     if (getCookie("player")=="NaN"){
         document.cookie="player=0";
     }
@@ -27,6 +36,9 @@ $(function(){
 $("#playerpunkte").html(getCookie("player"));
     $("#pcpunkte").html(getCookie("pc"));
     $(':button.button').on('click',function(){
+        /**
+         * wenn noch keiner gewonnen hat und in dem Button noch nichts steht, dann wird er mit X oder O beschreiben
+         */
         if (u==0){
             if ($(this).val()==""){
                 if (i%2==0){
@@ -52,7 +64,7 @@ $("#playerpunkte").html(getCookie("player"));
                 setResult("O hat gewonnen!",true);
                 setwins("pc");
                 u++;
-            } else if            ((($("#a").val()=='X') && ($("#b").val()=='X') && ($("#c").val()=='X')) ||
+            } else if((($("#a").val()=='X') && ($("#b").val()=='X') && ($("#c").val()=='X')) ||
                 (($("#c").val()=='X') && ($("#f").val()=='X') && ($("#i").val()=='X')) ||
                 (($("#i").val()=='X') && ($("#h").val()=='X') && ($("#g").val()=='X')) ||
                 (($("#g").val()=='X') && ($("#d").val()=='X') && ($("#a").val()=='X')) ||
@@ -76,7 +88,11 @@ $("#playerpunkte").html(getCookie("player"));
 });
 
 
-
+/**
+ * lässt eine Ergebnis Ausgabe erscheinen und resettet die Seite
+ * @param text
+ * @param reset
+ */
 var setResult = function(text,reset=false){
 
 
@@ -90,11 +106,21 @@ var setResult = function(text,reset=false){
     });
 };
 
+/**
+ *hohlt cookie vom container
+ * @param name
+ * @returns {T}
+ */
 function getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
     if (parts.length == 2) return parts.pop().split(";").shift();
 }
+
+/**
+ * setzt die wins
+ * @param player
+ */
 function setwins(player){
     var wc=getCookie(player);
     var wp=getCookie(player);
@@ -110,15 +136,26 @@ function setwins(player){
     gewonnen(wp,wc);
 
 }
+
 function getmatch(){
     return getCookie("match");
 }
 
+
+/**
+ * hohlt die wins
+ * @param player
+ * @returns {T}
+ */
 function getwins(player){
     return getCookie(player);
 }
 
-
+/**
+ * Überprüft, wer gewonnen hat, setzt die wins und loses auf 0, geht zurück zu den Modien
+ * @param wp
+ * @param wc
+ */
 function gewonnen( wp, wc){
     if(wp >= 2 || wc >= 2){
         document.cookie="player=0";

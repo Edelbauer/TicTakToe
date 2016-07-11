@@ -3,9 +3,13 @@
  */
 //alle
 
-var u=0;
-var h=9;
+var u=0;//wird auf 1 gesetzt, wenn bereits jemand gewonnen hat
+var h=9;//zählt die möglichen Spielzüge hinunter
 
+
+/**
+ * geht eine Ebene zurück
+ */
 function zurueck(){
 
     window.location="/Tic_Tac_Toe/views/modien_leicht.html";
@@ -15,6 +19,11 @@ function Reset(){
     window.location=window.location;
 }
 
+
+/**
+ * Wenn noch niemand gewonnen hat, und das Feld noch leer ist, wird es mit einem X beschrieben
+ * und es wird com() aufgerufen
+ */
 $(function(){
 
     $('#lblWin').fadeOut(0);
@@ -47,7 +56,7 @@ $(function(){
                 (($("#a").val()=='X') && ($("#e").val()=='X') && ($("#i").val()=='X'))){
                 setResult("Gewonnen!",true);
 
-                //Gewinnabfrage************************************************************
+
 
                 u++;
             } else if((($("#a").val()=='O') && ($("#b").val()=='O') && ($("#c").val()=='O')) ||
@@ -87,8 +96,10 @@ var setResult = function(text,reset=false){
 };
 
 
-
-
+/**
+ * generiert eine Random Zahl, die dann in eine id umgewandelt wird
+ * @returns {*}
+ */
 function random(){
     var id;
     var min = 0;
@@ -159,7 +170,11 @@ function com(){
 
     }
 
-
+    /**
+     * überprüft, in dem Feld mit der id ein O oder X enthalten ist
+     * @param id
+     * @returns {number}
+     */
     function ueberpruefe(id){
         if ($("#"+id).val()==""){
             return 0;

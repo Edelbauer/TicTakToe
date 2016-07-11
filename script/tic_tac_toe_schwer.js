@@ -73,7 +73,11 @@ $(function(){
 
 });
 
-
+/**
+ * lässt das Resultat erscheinen
+ * @param text
+ * @param reset
+ */
 var setResult = function(text,reset=false){
 
 
@@ -88,8 +92,10 @@ var setResult = function(text,reset=false){
 };
 
 
-
-
+/***
+ * generiert eine random Zahl und wandelt sie in eine id um
+ * @returns {*}
+ */
 function random(){
     var id;
     var min = 0;
@@ -132,7 +138,6 @@ function random(){
     }
 
 
-    //KIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKI
 
     //waagrecht**********************************************************************
     //erste reihe
@@ -236,7 +241,7 @@ function random(){
         id = "c";
 
     }
-    //KIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIK
+
 
 
 
@@ -247,7 +252,9 @@ function random(){
 }
 
 
-
+/**
+ * Schreibt in ein Feld O
+ */
 function com(){
     var id=random();
     while (ueberpruefe(id)){
@@ -273,7 +280,11 @@ function com(){
 
     }
 
-
+    /**
+     * Überprüft, ob in dem Feld etwas enthalten ist
+     * @param id
+     * @returns {number}
+     */
     function ueberpruefe(id){
         if ($("#"+id).val()==""){
             return 0;

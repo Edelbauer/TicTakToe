@@ -102,12 +102,20 @@ var setResult = function(text,reset=false){
     });
 };
 
-
+/**
+ * hohlt den cookie vom container
+ * @param name
+ * @returns {T}
+ */
 function getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
     if (parts.length == 2) return parts.pop().split(";").shift();
 }
+/**
+ * erhöht,wenn gewonnen
+ */
+
 function setwins(player){
     var wc=getCookie(player);
     var wp=getCookie(player);
@@ -126,7 +134,10 @@ function setwins(player){
 function getmatch(){
         return getCookie("match");
 }
-
+/**
+ * hohlt die wins
+ * @param player
+ */
 function getwins(player){
         return getCookie(player);
 }
@@ -149,7 +160,10 @@ function gewonnen( wp, wc){
 
 }
 
-
+/**
+ * generiert eine Random Zahl die in eine id umgewandelt wird
+ * @returns {*}
+ */
 function random(){
     var id;
     var min = 0;
@@ -194,7 +208,11 @@ function random(){
 }
 
 
-
+/**
+ * bekommt die random id
+ * setzt ein O an der id, wenn dort noch kein Zeichen steht
+ * oder schon jemand gewonnen hat
+ */
 function com(){
     var id=random();
     while (ueberpruefe(id)){
@@ -220,7 +238,11 @@ function com(){
 
     }
 
-
+    /**
+     * Überprüft, ob in dem Feld mit der übergeenen id bereits ein Zeichen steht
+     * @param id
+     * @returns {number}
+     */
     function ueberpruefe(id){
         if ($("#"+id).val()==""){
             return 0;

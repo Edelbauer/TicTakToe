@@ -1,10 +1,11 @@
 /**
  * Created by Praktikant.STTINSM on 07.07.2016.
  */
-//alle
-var i=0;
-var h=9;
-var u=0;
+
+var i=0;//setzt abwechselnd X und O in die Buttons
+
+var h=9;//zählt die Spielzüge
+var u=0;//schaut ob schon jemand gewonnen hat
 function zurueck(){
     window.location="/Tic_Tac_Toe/views/modien_2_spieler.html";
 
@@ -12,11 +13,12 @@ function zurueck(){
 }
 
 
-
+/**
+ * resettet die Seite
+ * @constructor
+ */
 function Reset(){
     window.location=window.location;
-
-
 }
 
 $(function(){
@@ -58,6 +60,7 @@ $(function(){
                 setResult("X hat gewonnen!",true);
                 u++;
             }
+            //wenn alle Spielzüge verbraucht sind und noch keiner gewonnen hat
             if (h==0&& u==0){
                 setResult("Unentschieden!",true);
             }
@@ -68,7 +71,11 @@ $(function(){
 });
 
 
-
+/**
+ * Lässt eine Gewinn/Verlust/Unentschieden Ausgabe erscheinen und resettet die Seite
+ * @param text
+ * @param reset
+ */
 var setResult = function(text,reset=false){
 
 

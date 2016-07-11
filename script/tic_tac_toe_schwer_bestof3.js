@@ -29,7 +29,9 @@ $(function(){
     $("#playerpunkte").html(getCookie("player"));
     $("#pcpunkte").html(getCookie("pc"));
     $('#lblWin').fadeOut(0);
-
+    /**
+     * Schreibt X in ein Feld
+     */
     $(':button.button').on('click',function(){
         if (u==0){
 
@@ -82,7 +84,11 @@ $(function(){
 
 });
 
-
+/**
+ * Lässt das Resultat erscheinen
+ * @param text
+ * @param reset
+ */
 var setResult = function(text,reset=false){
 
 
@@ -97,8 +103,12 @@ var setResult = function(text,reset=false){
 };
 
 
-
-
+/**
+ *
+ * hohlt cookie aus dem container
+ * @param name
+ * @returns {T}
+ */
 function getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
@@ -123,11 +133,20 @@ function getmatch(){
     return getCookie("match");
 }
 
+/**
+ * hohlt die wins
+ * @param player
+ * @returns {T}
+ */
 function getwins(player){
     return getCookie(player);
 }
 
-
+/**
+ * Prüft, wer gewonnen hat und setzt alles zurück
+ * @param wp
+ * @param wc
+ */
 function gewonnen( wp, wc){
     if(wp >= 2 || wc >= 2){
         document.cookie="player=0";

@@ -12,6 +12,9 @@ var u=0;
 var h=9;
 var wc=0;
 var wp=0;
+/**
+ * Geht eine Ebene zurück
+ */
 function zurueck(){
     document.cookie="player=0";
     document.cookie="pc=0";
@@ -100,12 +103,21 @@ var setResult = function(text,reset=false){
 };
 
 
-
+/**
+ * hohlt cookie vom container
+ * @param name
+ * @returns {T}
+ */
 function getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
     if (parts.length == 2) return parts.pop().split(";").shift();
 }
+
+/**
+ *Wins werden erhöht
+ * @param player
+ */
 function setwins(player){
     var wc=getCookie(player);
     var wp=getCookie(player);
@@ -125,11 +137,20 @@ function getmatch(){
     return getCookie("match");
 }
 
+/**
+ * hohlt die wins
+ * @param player
+ * @returns {T}
+ */
 function getwins(player){
     return getCookie(player);
 }
 
-
+/**
+ * überprüft, wer gewonnen hat
+ * @param wp
+ * @param wc
+ */
 function gewonnen( wp, wc){
     if(wp >= 2 || wc >= 2){
         document.cookie="player=0";
@@ -146,7 +167,10 @@ function gewonnen( wp, wc){
 
 
 }
-
+/**
+ * generiert eine Random Zahl und wandelt sie in eine id um
+ * @returns {*}
+ */
 function random(){
     var random=0;
     var id;
@@ -190,7 +214,7 @@ function random(){
     }
 
     if (random==0){
-        //KIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKI
+
 
         //waagrecht**********************************************************************
         //erste reihe
@@ -294,7 +318,7 @@ function random(){
             id = "c";
 
         }
-        //KIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIKIK
+
         random=1;
     }else if (random== -1){
         random =2;
@@ -315,7 +339,9 @@ function random(){
 }
 
 
-
+/**
+ * Setzt ein O an der übergebenen id
+ */
 function com(){
     var id=random();
     while (ueberpruefe(id)){
@@ -338,7 +364,11 @@ function com(){
         }
     }
 
-
+    /**
+     * Überprüft, ob an dem Übergebenen Feld sich ein Zeichen befindet
+     * @param id
+     * @returns {number}
+     */
     function ueberpruefe(id){
         if ($("#"+id).val()==""){
             return 0;
