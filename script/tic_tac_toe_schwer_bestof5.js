@@ -152,10 +152,10 @@ function gewonnen( wp, wc){
         document.cookie="player=0";
         document.cookie="pc=0";
         if(wp>wc){
-            alert("win");
+            setResult("You won!",false);
             window.location="/Tic_Tac_Toe/views/modien_schwer.html";
         }else
-            alert("lose");
+            setResult("You lost",false);
         window.location="/Tic_Tac_Toe/views/modien_schwer.html";
 
     }

@@ -158,10 +158,10 @@ function gewonnen( wp, wc){
         document.cookie="player=0";
         document.cookie="pc=0";
         if(wp>wc){
-            alert("O Won!");
+            setResult("O Won!",false);
             window.location="/Tic_Tac_Toe/views/modien_2_spieler.html";
         }else
-            alert("X Won!");
+            alert("X Won!",false);
         window.location="/Tic_Tac_Toe/views/modien_2_spieler.html";
 
     }
