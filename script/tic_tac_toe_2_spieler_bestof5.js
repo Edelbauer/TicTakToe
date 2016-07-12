@@ -161,7 +161,7 @@ function gewonnen( wp, wc){
             setResult("O Won!",false);
             window.location="/Tic_Tac_Toe/views/modien_2_spieler.html";
         }else
-            alert("X Won!",false);
+            setResult("X Won!",false);
         window.location="/Tic_Tac_Toe/views/modien_2_spieler.html";
 
     }
