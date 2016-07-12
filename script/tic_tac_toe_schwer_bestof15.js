@@ -156,7 +156,7 @@ function gewonnen( wp, wc){
             setResult("You won!",false);
             window.location="/Tic_Tac_Toe/views/modien_schwer.html";
         }else
-            setResult("You lost!"false);
+            setResult("You lost!",false);
         window.location="/Tic_Tac_Toe/views/modien_schwer.html";
 
     }
