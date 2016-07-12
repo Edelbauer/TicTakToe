@@ -226,6 +226,22 @@ function random(){
 
 
 //künstliche Intelligenz
+
+    if ($("#a").val()=="X"){
+        id ="i";
+    }
+    if ($("#c").val()=="X"){
+        id ="g";
+    }
+    if ($("#i").val()=="X"){
+        id="a";
+
+
+    }
+    if ($("#g").val()=="X"){
+        id = "c";
+    }
+
     //Verteidigung
     //waagrecht**********************************************************************
     //erste reihe
