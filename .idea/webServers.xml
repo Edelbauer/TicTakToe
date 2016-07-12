@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="8685b90d-b410-4a44-ab8a-049e25084fcc" name="wfPi" url="http://10.5.6.28">
+        <fileTransfer host="10.5.6.28" port="21" rootFolder="/html" password="dfc4dfcfdfdfdfc7dfcbdfc4" username="ftpuser">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
